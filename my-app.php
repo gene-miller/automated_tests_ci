@@ -1,4 +1,3 @@
-// A small PHP application
 
 <?php
 
