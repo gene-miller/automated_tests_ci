@@ -58,12 +58,11 @@ jobs:
 
       - name: Checking build artifacts
         run: |
-          ls -la
           # Set the file path you want to check
           FILE_PATH="build_file.txt"
           
           # Check if the file exists
-          if [ ! -e "$file_path" ]; then
+          if [ ! -f "$file_path" ]; then
           echo "Error: File $file_path does not exist."
           exit 1
           fi
