@@ -58,6 +58,7 @@ jobs:
 
       - name: Checking build artifacts
         run: |
+          ls -la
           # Set the file path you want to check
           FILE_PATH="build_file.txt"
           
