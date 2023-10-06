@@ -36,7 +36,7 @@ jobs:
           echo "Starting deployment simulator..."
           echo "Step 1: Preparing deployment..."
           sleep 2  # Simulate a 2-second step
-          echo "Step 2: Deploying application..."
+          echo "Step 2: Deploying application using api key ${{ secrets.DEPLOY_KEY }}"
           sleep 3  # Simulate a 3-second step
           echo "Deployment complete."
             
