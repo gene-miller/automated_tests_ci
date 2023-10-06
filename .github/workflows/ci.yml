@@ -1,6 +1,22 @@
 name: learn-github-actions
 on: [push]
 jobs:
+  build-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate build files
+        run: echo "A generated build file" >> build_file.txt
+
+      - name: Store build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build_artifact
+          path: build_file.txt
+          retention-days: 1
+
   run-app:
     runs-on: ubuntu-latest
     steps:
@@ -31,8 +47,27 @@ jobs:
     runs-on: ubuntu-latest
     needs: [run-app,coding_standards]
     steps:
-      - uses: actions/checkout@v4
-      - run: |
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download a build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build_artifact
+
+      - name: Checking build artifacts
+        run: |
+          # Set the file path you want to check
+          FILE_PATH="build_file.txt"
+          
+          # Check if the file exists
+          if [ ! -e "$file_path" ]; then
+          echo "Error: File $file_path does not exist."
+          exit 1
+          fi
+
+      - name: Deploy code
+        run: |
           echo "Starting deployment simulator..."
           echo "Step 1: Preparing deployment..."
           sleep 2  # Simulate a 2-second step
